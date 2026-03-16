@@ -1168,7 +1168,7 @@
       emailTemplates.forEach(function(filename, index) {
         var num = index + 1;
         var iframeSrc = displayOverrides[filename] || filename;
-        var base = '../\u0412\u0430\u0436\u043d\u043e\u0435/';
+        var base = (location.protocol === 'file:') ? '../\u0412\u0430\u0436\u043d\u043e\u0435/' : './';
         var srcUrl  = base + encodeURIComponent(iframeSrc).replace(/%20/g, '%20');
         var openUrl = base + encodeURIComponent(filename);
         var card = document.createElement('div');
