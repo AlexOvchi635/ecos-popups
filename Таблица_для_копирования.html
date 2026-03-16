@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Матрица совместимости Email - Копировать в Google Sheets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .instruction {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        .instruction h2 {
+            margin-top: 0;
+            color: #856404;
+        }
+        .instruction ol {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        .instruction strong {
+            color: #d9534f;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #ddd;
+        }
+        td {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        tr:hover {
+            background: #f0f0f0;
+        }
+        .category {
+            background: #e3f2fd !important;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+            color: #1976d2;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .section-title {
+            background: #2196F3;
+            color: white;
+            padding: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="instruction">
+    <h2>📋 ИНСТРУКЦИЯ: Как скопировать в Google Sheets</h2>
+    <ol>
+        <li><strong>Выделите таблицу ниже</strong> (наведите мышь на таблицу → кликните левой кнопкой → Ctrl+A чтобы выделить всё)</li>
+        <li><strong>Скопируйте</strong> (нажмите Ctrl+C)</li>
+        <li><strong>Откройте Google Sheets</strong> → <a href="https://sheets.google.com" target="_blank">sheets.google.com</a></li>
+        <li><strong>Кликните на ячейку A1</strong></li>
+        <li><strong>Вставьте</strong> (нажмите Ctrl+V)</li>
+        <li><strong>Готово!</strong> ✅ Таблица скопируется со всем форматированием</li>
+    </ol>
+</div>
+
+<h1>📊 Матрица Совместимости Email Клиентов</h1>
+<p class="subtitle">Поддержка CSS свойств в популярных почтовых клиентах</p>
+
+<!-- ТАБЛИЦА 1: CSS СОВМЕСТИМОСТЬ -->
+<table id="table1">
+    <thead>
+        <tr>
+            <th>CSS Свойство</th>
+            <th>Gmail (веб)</th>
+            <th>Outlook.com (веб)</th>
+            <th>Yahoo! Mail (веб)</th>
+            <th>Apple Mail (iOS)</th>
+            <th>Gmail (app)</th>
+            <th>Samsung Email</th>
+            <th>Outlook (desktop)</th>
+            <th>Apple Mail (macOS)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td colspan="9" class="category">LAYOUT & BOX MODEL</td></tr>
+        <tr><td>padding</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>margin</td><td>⚠️ Частичная</td><td>⚠️ Частичная</td><td>⚠️ Частичная</td><td>✅ Полная</td><td>⚠️ Частичная</td><td>✅ Полная</td><td>⚠️ Удаляет auto</td><td>✅ Полная</td></tr>
+        <tr><td>width</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>max-width</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        <tr><td>box-sizing</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        
+        <tr><td colspan="9" class="category">BACKGROUND</td></tr>
+        <tr><td>background-color</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>background-image</td><td>⚠️ Блокируется</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>⚠️ Блокируется</td><td>✅ Полная</td><td>⚠️ Требует VML</td><td>✅ Полная</td></tr>
+        <tr><td>linear-gradient()</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>✅ Полная</td><td>❌ Не поддерживает</td><td>⚠️ Частичная</td><td>❌ Требует VML</td><td>✅ Полная</td></tr>
+        
+        <tr><td colspan="9" class="category">BORDERS & RADIUS</td></tr>
+        <tr><td>border</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>border-radius</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        <tr><td>box-shadow</td><td>⚠️ Частичная</td><td>⚠️ Частичная</td><td>⚠️ Частичная</td><td>✅ Полная</td><td>⚠️ Частичная</td><td>✅ Полная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        
+        <tr><td colspan="9" class="category">TYPOGRAPHY</td></tr>
+        <tr><td>font-family</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>font-size</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>font-weight</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>color</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>text-align</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>line-height</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>letter-spacing</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>text-transform</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>text-decoration</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        
+        <tr><td colspan="9" class="category">WEB FONTS</td></tr>
+        <tr><td>@font-face</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>✅ Полная</td><td>❌ Не поддерживает</td><td>⚠️ Частичная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        <tr><td>&lt;link&gt; web fonts</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>✅ Полная</td><td>❌ Удаляет</td><td>⚠️ Частичная</td><td>❌ Удаляет</td><td>✅ Полная</td></tr>
+        
+        <tr><td colspan="9" class="category">POSITIONING</td></tr>
+        <tr><td>display: block</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>display: inline-block</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>⚠️ Нестабильная</td><td>✅ Полная</td></tr>
+        <tr><td>display: flex</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>✅ Полная</td><td>❌ Не поддерживает</td><td>⚠️ Частичная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        <tr><td>display: grid</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>⚠️ Частичная</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>⚠️ Частичная</td></tr>
+        <tr><td>position: absolute</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>✅ Полная</td><td>❌ Удаляет</td><td>⚠️ Частичная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        <tr><td>float</td><td>⚠️ Частичная</td><td>⚠️ Частичная</td><td>⚠️ Частичная</td><td>✅ Полная</td><td>⚠️ Частичная</td><td>✅ Полная</td><td>⚠️ Нестабильная</td><td>✅ Полная</td></tr>
+        
+        <tr><td colspan="9" class="category">MEDIA QUERIES</td></tr>
+        <tr><td>@media</td><td>✅ Полная</td><td>✅ Полная</td><td>⚠️ Частичная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>❌ Игнорирует</td><td>✅ Полная</td></tr>
+        <tr><td>@media (max-width)</td><td>✅ Полная</td><td>✅ Полная</td><td>⚠️ Частичная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>❌ Игнорирует</td><td>✅ Полная</td></tr>
+        
+        <tr><td colspan="9" class="category">ANIMATION & TRANSITIONS</td></tr>
+        <tr><td>transition</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>✅ Полная</td><td>❌ Удаляет</td><td>⚠️ Частичная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        <tr><td>animation</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>✅ Полная</td><td>❌ Удаляет</td><td>⚠️ Частичная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        <tr><td>transform</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>❌ Удаляет</td><td>✅ Полная</td><td>❌ Удаляет</td><td>⚠️ Частичная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        
+        <tr><td colspan="9" class="category">ADVANCED CSS</td></tr>
+        <tr><td>opacity</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>⚠️ Требует filter</td><td>✅ Полная</td></tr>
+        <tr><td>rgba() colors</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>❌ Не поддерживает</td><td>✅ Полная</td></tr>
+        <tr><td>:hover</td><td>✅ Полная</td><td>✅ Полная</td><td>✅ Полная</td><td>❌ Не применимо</td><td>❌ Не применимо</td><td>❌ Не применимо</td><td>✅ Полная</td><td>✅ Полная</td></tr>
+        <tr><td>CSS Variables</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>⚠️ Частичная</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>❌ Не поддерживает</td><td>⚠️ Частичная</td></tr>
+    </tbody>
+</table>
+
+<div class="section-title">📊 Характеристики Почтовых Клиентов</div>
+
+<table id="table2">
+    <thead>
+        <tr>
+            <th>Почтовый Клиент</th>
+            <th>Доля рынка</th>
+            <th>Движок</th>
+            <th>Лимит размера</th>
+            <th>Градиенты</th>
+            <th>border-radius</th>
+            <th>Media queries</th>
+            <th>Веб-шрифты</th>
+            <th>Dark Mode</th>
+            <th>Главная проблема</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Gmail (веб)</td><td>30-35%</td><td>Собственный</td><td>102KB</td><td>❌</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>Обрезает >102KB</td></tr>
+        <tr><td>Outlook.com (веб)</td><td>8-10%</td><td>Office Online</td><td>Без лимита</td><td>❌</td><td>✅</td><td>✅</td><td>❌</td><td>⚠️</td><td>Модифицирует стили</td></tr>
+        <tr><td>Yahoo! Mail (веб)</td><td>6-8%</td><td>Собственный</td><td>Без лимита</td><td>❌</td><td>✅</td><td>⚠️</td><td>❌</td><td>❌</td><td>Нестабильные MQ</td></tr>
+        <tr><td>Apple Mail (iOS)</td><td>35-40%</td><td>WebKit</td><td>Без лимита</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>Автомасштабирование</td></tr>
+        <tr><td>Gmail (app)</td><td>25-30%</td><td>WebView</td><td>102KB</td><td>❌</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>Блокирует картинки</td></tr>
+        <tr><td>Samsung Email</td><td>5-7%</td><td>Samsung Internet</td><td>Без лимита</td><td>⚠️</td><td>✅</td><td>✅</td><td>⚠️</td><td>⚠️</td><td>Баги на моделях</td></tr>
+        <tr><td>Outlook (desktop)</td><td>10-15%</td><td>Word (!)</td><td>Без лимита</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>Движок Word</td></tr>
+        <tr><td>Apple Mail (macOS)</td><td>10-12%</td><td>WebKit</td><td>Без лимита</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>Dark Mode меняет цвета</td></tr>
+    </tbody>
+</table>
+
+<div class="section-title">💻 Статистика Операционных Систем</div>
+
+<table id="table3">
+    <thead>
+        <tr>
+            <th>ОС</th>
+            <th>Доля рынка</th>
+            <th>Тип</th>
+            <th>Популярные клиенты</th>
+            <th>Размер кнопок</th>
+            <th>Мин. шрифт</th>
+            <th>Touch</th>
+            <th>Ширина экрана</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Windows 10/11</td><td>35-40%</td><td>Десктоп</td><td>Outlook Desktop, Gmail веб</td><td>Любые</td><td>14px</td><td>❌</td><td>1920-1366px</td></tr>
+        <tr><td>macOS</td><td>25-30%</td><td>Десктоп</td><td>Apple Mail, Gmail веб</td><td>Любые</td><td>14px</td><td>⚠️</td><td>2560-1440px</td></tr>
+        <tr><td>iOS (iPhone)</td><td>30-35%</td><td>Мобильный</td><td>Apple Mail, Gmail app</td><td>44x44px</td><td>13px</td><td>✅</td><td>375-428px</td></tr>
+        <tr><td>Android</td><td>25-30%</td><td>Мобильный</td><td>Gmail app, Samsung Email</td><td>48x48px</td><td>14px</td><td>✅</td><td>360-412px</td></tr>
+    </tbody>
+</table>
+
+<div class="section-title">⚡ Быстрая Шпаргалка - Главные Проблемы</div>
+
+<table id="table4">
+    <thead>
+        <tr>
+            <th>Почтовик</th>
+            <th>Главная проблема</th>
+            <th>Как решить</th>
+            <th>Что проверить</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Gmail (веб)</td><td>Обрезает письма > 102KB</td><td>Минимизируйте HTML, сжимайте</td><td>Размер файла < 100KB</td></tr>
+        <tr><td>Outlook Desktop</td><td>Использует Word для рендеринга!</td><td>Таблицы, width вместо max-width, VML</td><td>border-radius не работает</td></tr>
+        <tr><td>Apple Mail iOS</td><td>Автомасштабирование текста < 13px</td><td>Минимум 13px для текста</td><td>Dark Mode меняет цвета</td></tr>
+        <tr><td>Gmail App</td><td>Блокирует background-image</td><td>background-color + текст без картинок</td><td>Размер < 100KB</td></tr>
+        <tr><td>Outlook.com</td><td>Добавляет свои стили</td><td>Используйте !important</td><td>Кнопки могут менять вид</td></tr>
+        <tr><td>Yahoo! Mail</td><td>Нестабильные media queries</td><td>Простые MQ, избегайте вложенности</td><td>Мобильную версию отдельно</td></tr>
+        <tr><td>Samsung Email</td><td>Баги на разных моделях</td><td>Тестируйте на устройствах</td><td>Веб-шрифты нестабильны</td></tr>
+        <tr><td>Apple Mail macOS</td><td>Dark Mode меняет цвета</td><td>@media (prefers-color-scheme: dark)</td><td>Контрастность в темной теме</td></tr>
+    </tbody>
+</table>
+
+<div style="background: #d4edda; border: 2px solid #28a745; padding: 20px; margin: 40px 0; border-radius: 8px; text-align: center;">
+    <h3 style="margin-top: 0; color: #155724;">✅ Готово!</h3>
+    <p style="font-size: 16px; color: #155724; margin: 10px 0;">
+        Теперь просто выделите таблицу выше, скопируйте (Ctrl+C) и вставьте в Google Sheets (Ctrl+V)
+    </p>
+    <p style="font-size: 14px; color: #155724; margin: 0;">
+        Все эмодзи и форматирование сохранятся! 🎉
+    </p>
+</div>
+
+</body>
+</html>
+
+

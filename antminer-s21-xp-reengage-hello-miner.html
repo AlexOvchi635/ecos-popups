@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=600, initial-scale=1.0">
+    <title>Email Template</title>
+    <style>
+        @font-face {
+            font-family: 'TT Runs';
+            src: url('https://fonts.cdnfonts.com/css/tt-runs') format('woff2');
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f6fa;
+            font-family: Arial, sans-serif;
+            color: #222;
+            width: 100% !important;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        .container {
+            max-width: 600px !important;
+            margin: 0 auto !important;
+            background: #fff;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        td {
+            padding: 0;
+        }
+        img {
+            border: 0;
+            -ms-interpolation-mode: bicubic;
+            max-width: 100%;
+            display: block;
+        }
+        .header-bar {
+            background: #fff;
+            color: #888;
+            font-size: 13px;
+            text-align: center;
+            padding: 10px 0 6px 0;
+        }
+        .logo {
+            text-align: center;
+            font-weight: bold;
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin: 24px 0 8px 0;
+        }
+        .nav {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .nav a {
+            color: #222;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .main-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            margin: 24px 0 8px 0;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+        .main-image {
+            display: block;
+            margin: 0 auto 24px auto;
+            max-width: 90%;
+            border-radius: 8px;
+        }
+        .features-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            margin: 0 0 4px 0;
+        }
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .feature-card {
+            background: #f5f6fa;
+            border-radius: 8px;
+            width: 46%;
+            min-width: 240px;
+            padding: 16px 12px;
+            box-sizing: border-box;
+            margin-bottom: 0;
+        }
+        .feature-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .feature-desc {
+            color: #666;
+            font-size: 13px;
+        }
+        .cta-btn {
+            display: block;
+            margin: 24px auto 0 auto;
+            background: #5c5ce6;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 36px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .footer {
+            background: #ededf3;
+            color: #888;
+            font-size: 13px;
+            text-align: center;
+            padding: 24px 0 8px 0;
+        }
+        .footer-links {
+            margin: 8px 0 8px 0;
+        }
+        .footer-links a {
+            color: #888;
+            text-decoration: underline;
+            margin: 0 8px;
+            font-size: 13px;
+        }
+        .socials {
+            margin: 12px 0 8px 0;
+        }
+        .socials img {
+            width: 28px;
+            height: 28px;
+            margin: 0 6px;
+            vertical-align: middle;
+        }
+        .footer-logo {
+            text-align: center;
+            font-weight: bold;
+            font-size: 22px;
+            letter-spacing: 2px;
+            margin: 12px 0 0 0;
+        }
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            .responsive-table {
+                width: 100% !important;
+            }
+            .responsive-image {
+                height: auto !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            .responsive-button {
+                width: 80% !important;
+                min-width: 200px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+    <center>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f5f6fa">
+        <tr>
+            <td align="center" valign="top">
+                <table role="presentation" class="container" border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#ffffff">
+                    <!-- Header with logo -->
+                    <tr>
+                        <td align="center" style="padding: 30px 0;">
+                            <img src="https://ucarecdn.com/8cd30571-a49d-4880-8395-4dd013dccad0/noroot.png" alt="ECOS" width="150" style="margin: 0 auto;">
+                        </td>
+                    </tr>
+                    <!-- Navigation -->
+                    <tr>
+                        <td style="padding: 0 20px 20px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-bottom: 1px solid #eeeeee; margin-bottom: 10px;">
+                                <tr>
+                                    <td class="column" width="33.33%" style="padding: 10px; text-align: center;">
+                                        <a href="https://cp.ecos.am/mining-store/buy-asics" class="font-primary" style="color: #000000; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: 0.5px; text-transform: uppercase;">EQUIPMENT</a>
+                                    </td>
+                                    <td class="column" width="33.33%" style="padding: 10px; text-align: center;">
+                                        <a href="https://b24-r2gcuj.bitrix24.site/crm_form_rbpey/" class="font-primary" style="color: #000000; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: 0.5px; text-transform: uppercase;">CONTACT US</a>
+                                    </td>
+                                    <td class="column" width="33.33%" style="padding: 10px; text-align: center;">
+                                        <a href="https://ecos.am/en/about_us/" class="font-primary" style="color: #000000; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: 0.5px; text-transform: uppercase;">LEARN MORE</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- Greeting section -->
+                    <tr>
+                        <td align="center" style="padding: 30px 40px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td align="center" style="font-size: 40px; font-weight: bold; line-height: 1.15; margin-bottom: 20px; font-family: 'TT Runs', sans-serif; color: #222; padding-bottom: 20px;">HELLO, <span style="color:#222;">MINER</span><span style="color:#222;">!</span></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="font-size: 20px; line-height: 1.5; color: #222; padding-bottom: 30px;">
+                                        HAVEN'T HEARD FROM YOU IN A WHILE.<br>MAYBE IT'S TIME TO RECONSIDER YOUR <b>MINING OPPORTUNITIES?</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- Main content -->
+                    <tr>
+                        <td>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <!-- Text column -->
+                                    <td align="center" valign="middle" width="50%" style="padding: 0 15px;">
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td align="center" style="font-size: 24px; line-height: 1.1; font-family: 'Inter', Arial, sans-serif; font-weight: 500; letter-spacing: 1px; padding-bottom: 10px;"><b>YOU COULD'VE MADE...</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="padding-bottom: 20px;">
+                                                    <a href="https://ecos.am/en/mining-farm/preorder/?id=87" style="display: inline-block; background: #FF8C00; color: #222; border-radius: 10px; font-size: 18px; padding: 15px 20px; text-decoration: none; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; border: 2px solid #FF8C00; text-align: center;"><span style="font-size: 24px; display: block;">$850</span>IN LAST TWO MONTHS!</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <!-- Image column -->
+                                    <td align="center" valign="middle" width="50%" style="padding: 0 15px;">
+                                        <img class="responsive-image" src="https://brown-urban-ladybug-213.mypinata.cloud/ipfs/bafybeifl5puycq4at5cwjflss7e2hph5efcz5yxxkekfkxuvwl5cozfflq" alt="Main image" style="max-width: 100%; border-radius: 16px;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- Why section -->
+                    <tr>
+                        <td align="center" style="padding: 30px 40px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td align="center" style="font-size: 30px; font-weight: bold; margin-bottom: 15px; font-family: 'TT Runs', sans-serif; color: #222; padding-bottom: 15px;">ALONG WITH ANTMINER S21 XP!</td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="font-size: 18px; line-height: 1.6; color: #444; padding-bottom: 30px;">
+                                        <b>THE MOST POWERFUL IN THE SERIES</b>, reaching an impressive <b>270 TH/s</b>. Designed for maximum mining power, it ensures the fastest processing speeds and the <b>highest profitability</b> in large-scale mining operations.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- Feature cards -->
+                    <tr>
+                        <td>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <!-- First card -->
+                                    <td align="center" valign="top" width="50%" style="padding: 0 10px 20px 10px;">
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f5f6fa; border: 2px solid #E0E0E0; border-radius: 8px; height: 300px;">
+                                            <tr>
+                                                <td align="center" style="padding: 20px 15px 10px 15px; font-size: 26px; font-weight: bold; font-family: 'TT Runs', Arial, sans-serif; height: 80px;">ANTMINER S21 XP<br>270TH/s</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="padding: 10px 15px; height: 10px;">
+                                                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td align="left" style="font-size: 20px; line-height: 1.5; color: #444; font-family: Arial, sans-serif;">
+                                                                • Over 450$ per month<br>
+                                                                • Optimal power 3645W<br>
+                                                                • 219$ hosting in ECOS
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="padding: 20px 15px; height: 10px;">
+                                                    <a href="https://ecos.am/en/mining-farm/preorder/?id=87" style="display: inline-block; background: #FF9900; color: #222; border-radius: 6px; font-size: 15px; padding: 10px 0; text-decoration: none; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; border: 2px solid #FF9900; width: 220px; text-align: center;"><b>GET IT</b></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <!-- Second card -->
+                                    <td align="center" valign="top" width="50%" style="padding: 0 10px 20px 10px;">
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f5f6fa; border: 2px solid #E0E0E0; border-radius: 8px; height: 300px;">
+                                            <tr>
+                                                <td align="center" style="padding: 20px 15px 10px 15px; font-size: 26px; font-weight: bold; font-family: 'TT Runs', Arial, sans-serif; height: 80px;">RENT S21 XP<br>270TH/s</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="padding: 10px 15px; height: 10px;">
+                                                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td align="left" style="font-size: 20px; line-height: 1.5; color: #444; font-family: Arial, sans-serif;">
+                                                                • Mining starts in 24 hours<br>
+                                                                • 100% uptime<br>
+                                                                • Flexible hosting system
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="padding: 20px 15px; height: 10px;">
+                                                    <a href="https://ecos.am/en/rent-asic/preorder/?id=74" style="display: inline-block; background: #FF9900; color: #222; border-radius: 6px; font-size: 15px; padding: 10px 0; text-decoration: none; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; border: 2px solid #FF9900; width: 220px; text-align: center;"><b>RENT IT</b></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- Footer -->
+                    <tr>
+                        <td bgcolor="#ededf3" align="center" style="padding: 24px 0 8px 0; color: #888; font-size: 13px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td align="center" style="padding-bottom: 10px;">
+                                        ON A MISSION TO MAKE CRYPTO MINING<br>
+                                        AS PROFITABLE AS POSSIBLE<br>
+                                        © 2017 ECOS, Inc. All rights reserved.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding: 10px 0;">
+                                        <a href="https://ecos.am/en/blog/" style="color: #888; text-decoration: underline; margin: 0 8px;">Our Blog</a> |
+                                        <a href="https://ecos.am/en/" style="color: #888; text-decoration: underline; margin: 0 8px;">Store</a> |
+                                        <a href="https://ecoshelp.zendesk.com/hc/en-us/requests/new" style="color: #888; text-decoration: underline; margin: 0 8px;">Support Service</a> |
+                                        <a href="{{unsubscribe_url}}" style="color: #888; text-decoration: underline; margin: 0 8px;">Unsubscribe</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding: 10px 0;">
+                                        <a href="https://x.com/ecosmining" style="text-decoration: none; margin: 0 6px; display: inline-block;">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="28" height="28" style="display: inline-block;">
+                                        </a>
+                                        <a href="https://www.youtube.com/c/ECOS_mining" style="text-decoration: none; margin: 0 6px; display: inline-block;">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="28" height="28" style="display: inline-block;">
+                                        </a>
+                                        <a href="https://t.me/EcosCloudMining" style="text-decoration: none; margin: 0 6px; display: inline-block;">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" width="28" height="28" style="display: inline-block;">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding: 24px 0 16px 0;">
+                                        <img src="https://moccasin-cheerful-ant-113.mypinata.cloud/ipfs/bafkreigk5xcpogc4x5y6smm2a4h2u4esvnbxzhrmjw4kkojvkxwefbxuja" alt="ECOS" width="80" style="display: block; margin: 0 auto;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    </center>
+</body>
+</html>

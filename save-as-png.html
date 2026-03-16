@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сохранить в PNG</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 { font-size: 1.3rem; margin-bottom: 24px; }
+        .zone {
+            width: 100%;
+            max-width: 400px;
+            height: 180px;
+            border: 3px dashed #ff6b2c;
+            border-radius: 12px;
+            background: rgba(255,107,44,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .zone:hover, .zone.dragover { background: rgba(255,107,44,0.2); }
+        .zone p { margin: 8px 0; font-size: 1rem; text-align: center; }
+        .zone .hint { font-size: 0.85rem; opacity: 0.8; }
+        input[type="file"] { display: none; }
+        #status { margin-top: 20px; min-height: 24px; font-size: 0.9rem; }
+        #frame { position: fixed; left: -9999px; top: 0; width: 620px; min-height: 10000px; border: none; }
+    </style>
+</head>
+<body>
+    <h1>Сохранить вёрстку как PNG</h1>
+    <p class="hint" style="margin-bottom:16px;" id="hint">Нужен интернет — картинки грузятся с сайта. Подождите 5 сек после выбора файла.</p>
+    <div class="zone" id="zone">
+        <p>Перетащите HTML файл сюда</p>
+        <p class="hint">или нажмите для выбора</p>
+    </div>
+    <input type="file" id="file" accept=".html,.htm,text/html">
+    <p id="status"></p>
+    <iframe id="frame"></iframe>
+
+    <script>
+        if (location.protocol === 'file:') {
+            const h = document.getElementById('hint');
+            if (h) h.innerHTML = '⚠ Открыто без сервера — картинки могут не попасть в PNG. Используйте <b>ОТКРЫТЬ-SAVE-PNG.bat</b> для полного результата.';
+        }
+        const zone = document.getElementById('zone');
+        const fileInput = document.getElementById('file');
+        const status = document.getElementById('status');
+        const frame = document.getElementById('frame');
+
+        function convert(file) {
+            if (!file || !file.name.match(/\.(html?|htm)$/i)) {
+                status.textContent = 'Выберите HTML файл.';
+                return;
+            }
+            status.textContent = 'Загрузка картинок (подождите до 8 сек)…';
+            const reader = new FileReader();
+            reader.onload = function() {
+                let html = reader.result;
+                // Добавляем crossorigin для картинок
+                html = html.replace(/<img\s+/gi, '<img crossorigin="anonymous" ');
+                // Проксируем внешние картинки через CORS-прокси (mypinata, flaticon и др. часто блокируют canvas)
+                const proxy = 'https://corsproxy.io/?url=';
+                html = html.replace(/<img[^>]+src=["'](https?:\/\/[^"']+)["']/gi, (m) => {
+                    const url = m.match(/src=["'](https?:\/\/[^"']+)["']/i)[1];
+                    return m.replace(url, proxy + encodeURIComponent(url));
+                });
+                frame.srcdoc = html;
+                frame.onload = function() {
+                    const tryCapture = () => {
+                        const doc = frame.contentDocument;
+                        if (!doc || !doc.body) {
+                            status.textContent = 'Ошибка доступа. Откройте save-as-png.html двойным кликом по файлу.';
+                            return;
+                        }
+                        // Ждём загрузки картинок и шрифтов
+                        const imgs = doc.querySelectorAll('img');
+                        const toLoad = Array.from(imgs).filter(i => !i.complete);
+                        const imgWait = toLoad.length ? Promise.all(toLoad.map(i => new Promise(r => { i.onload = i.onerror = r; }))) : Promise.resolve();
+                        const fontWait = doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve();
+                        Promise.all([imgWait, fontWait]).then(() => new Promise(r => setTimeout(r, 5000))).then(() => {
+                    html2canvas(doc.body, {
+                        useCORS: true,
+                        allowTaint: true,
+                        scale: 1,
+                        logging: false,
+                        backgroundColor: doc.body.style.backgroundColor || '#ffffff',
+                        windowWidth: doc.documentElement.scrollWidth || 620,
+                        windowHeight: doc.documentElement.scrollHeight,
+                        scrollX: 0,
+                        scrollY: 0,
+                        imageTimeout: 20000,
+                        onclone: (clonedDoc, el) => {
+                            const body = el || clonedDoc.body;
+                            if (!body) return;
+
+                            // FIX: html2canvas баг — display:inline-block внутри text-align:center
+                            // теряет позицию и текст рисуется за пределами canvas.
+                            // Конвертируем в block + auto margins — визуально то же самое.
+                            body.querySelectorAll('div[style*="inline-block"], span[style*="inline-block"], p[style*="inline-block"]').forEach(function(node) {
+                                var ancestor = node.parentElement;
+                                for (var i = 0; i < 5 && ancestor; i++, ancestor = ancestor.parentElement) {
+                                    var st = ancestor.getAttribute('style') || '';
+                                    if (st.indexOf('text-align: center') !== -1 || st.indexOf('text-align:center') !== -1) {
+                                        node.style.display = 'block';
+                                        node.style.marginLeft = 'auto';
+                                        node.style.marginRight = 'auto';
+                                        node.style.width = 'fit-content';
+                                        node.style.maxWidth = '100%';
+                                        break;
+                                    }
+                                }
+                            });
+
+                            // FIX: html2canvas не захватывает value у input/textarea — заменяем на видимый текст
+                            body.querySelectorAll('input[type="text"], input:not([type]), textarea').forEach(inp => {
+                                const val = inp.value || inp.placeholder || '';
+                                if (!val) return;
+                                const span = clonedDoc.createElement('span');
+                                span.textContent = val;
+                                span.style.cssText = 'display:inline-block;padding:8px 12px;border:1px solid #ccc;font:inherit;min-width:' + (inp.offsetWidth || 120) + 'px;min-height:' + (inp.offsetHeight || 36) + 'px;';
+                                inp.parentNode.replaceChild(span, inp);
+                            });
+                        }
+                    }).then(canvas => {
+                        const name = file.name.replace(/\.(html?|htm)$/i, '') + '.png';
+                        const a = document.createElement('a');
+                        a.download = name;
+                        a.href = canvas.toDataURL('image/png');
+                        a.click();
+                        status.textContent = 'Готово! Скачан: ' + name;
+                    }).catch(err => {
+                        status.textContent = 'Ошибка: ' + (err.message || 'не удалось');
+                    });
+                        });
+                    };
+                    setTimeout(tryCapture, 100);
+                };
+            };
+            reader.readAsText(file, 'UTF-8');
+        }
+
+        zone.onclick = () => fileInput.click();
+
+        zone.ondragover = (e) => { e.preventDefault(); zone.classList.add('dragover'); };
+        zone.ondragleave = () => zone.classList.remove('dragover');
+        zone.ondrop = (e) => {
+            e.preventDefault();
+            zone.classList.remove('dragover');
+            const f = e.dataTransfer.files[0];
+            if (f) convert(f);
+        };
+
+        fileInput.onchange = () => {
+            const f = fileInput.files[0];
+            if (f) convert(f);
+            fileInput.value = '';
+        };
+    </script>
+</body>
+</html>

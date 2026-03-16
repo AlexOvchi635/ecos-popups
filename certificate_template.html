@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Template - ECOS</title>
+    <style type="text/css">
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        body {
+            background: #FFFFFF;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 297mm;
+            min-height: 105mm;
+            margin: 0 auto;
+        }
+        .certificate-container {
+            width: 297mm;
+            min-height: 105mm;
+            background: #FFFFFF;
+            padding: 12mm 30mm;
+            box-sizing: border-box;
+            position: relative;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            margin: 20px auto;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .circuit-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(90deg, #333 1px, transparent 1px),
+                linear-gradient(180deg, #333 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+        .circuit-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.08;
+            background-image: radial-gradient(circle, #333 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        .logo-section {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .logo-section img {
+            max-width: 100px;
+            height: auto;
+        }
+        .certificate-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin: 8px 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .certificate-text {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0 0 10px 0;
+        }
+        .recipient-name {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin: 12px 0;
+            padding: 8px 0;
+            min-height: 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .nomination-field {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin: 8px 0;
+            padding: 5px 0;
+            min-height: 20px;
+            font-weight: 600;
+        }
+        .prize-text {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+            margin: 10px 0;
+            padding: 5px 0;
+            min-height: 30px;
+        }
+        .bottom-section {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .bottom-left {
+            text-align: left;
+        }
+        .bottom-center {
+            text-align: center;
+            flex: 1;
+        }
+        .bottom-right {
+            text-align: right;
+        }
+        .contract-id {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .contract-id-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+        .seal {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #333;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            background: #f8f9fa;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .seal-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-size: 12px;
+            text-align: center;
+        }
+        .seal-inner svg {
+            width: 60px;
+            height: 60px;
+        }
+        .signature-field {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .signature-line {
+            border-top: 2px solid #333;
+            width: 150px;
+            margin: 20px 0 5px 0;
+            display: block;
+        }
+        .signature-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 3px;
+        }
+        .logo-bottom {
+            text-align: center;
+            margin: 8px 0;
+        }
+        .logo-bottom img {
+            max-width: 60px;
+            height: auto;
+        }
+        .tagline {
+            text-align: center;
+            font-size: 9px;
+            color: #666;
+            margin-top: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        @media print {
+            body {
+                margin: 0;
+                background: #FFFFFF;
+            }
+            .certificate-container {
+                padding: 12mm 30mm;
+                border-radius: 0;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <div class="content-wrapper">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <img src="https://files.ecos.am/sasha/rXMPaolTDgCgUJ5b2uD6Jd2E7K70c6Y2noaoX10I.png" alt="ECOS logo">
+            </div>
+
+            <!-- Certificate Title -->
+            <div class="certificate-title">
+                Certificate of Mining Investment
+            </div>
+
+            <!-- Certificate Text -->
+            <div class="certificate-text">
+                This certifies that
+            </div>
+
+            <!-- Recipient Name Field -->
+            <div class="recipient-name">
+                Кристина ECOS
+            </div>
+
+            <!-- Nomination Field -->
+            <div class="nomination-field">
+                has successfully invested in and operates a cloud mining contract with
+            </div>
+
+            <!-- Tagline -->
+            <div class="tagline">
+                Unlocking the Future of Digital Currency
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="bottom-section">
+                <div class="bottom-left">
+                    <div class="contract-id">Contract ID:</div>
+                    <div class="contract-id-value">[CONTRACT ID]</div>
+                </div>
+                
+                
+                <div class="bottom-right">
+                    <div class="signature-field">Date:</div>
+                    <div class="signature-line"></div>
+                    <div class="signature-label">[DATE]</div>
+                    <div class="signature-field" style="margin-top: 15px;">Authorized Signature:</div>
+                    <div class="signature-line"></div>
+                    <div class="signature-label">[SIGNATURE]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

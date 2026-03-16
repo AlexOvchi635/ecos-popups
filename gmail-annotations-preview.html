@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Promotions — Preview</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Google Sans', Arial, sans-serif; background: #f1f3f4; }
+
+        .gmail-chrome {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        /* Top bar */
+        .top-bar {
+            background: #fff;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .gmail-logo { font-size: 22px; color: #EA4335; font-weight: 400; letter-spacing: -1px; }
+        .gmail-logo span:nth-child(2) { color: #4285F4; }
+        .gmail-logo span:nth-child(3) { color: #FBBC05; }
+        .gmail-logo span:nth-child(4) { color: #EA4335; }
+        .gmail-logo span:nth-child(5) { color: #34A853; }
+        .gmail-logo span:nth-child(6) { color: #4285F4; }
+        .search-bar {
+            flex: 1;
+            background: #f1f3f4;
+            border-radius: 24px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #999;
+            max-width: 500px;
+        }
+
+        /* Tab bar */
+        .tab-bar {
+            display: flex;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0 16px;
+        }
+        .tab {
+            padding: 14px 20px;
+            font-size: 13px;
+            color: #444;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab.active {
+            color: #1a73e8;
+            border-bottom-color: #1a73e8;
+            font-weight: 500;
+        }
+        .tab-icon { font-size: 16px; }
+
+        /* Toolbar */
+        .toolbar {
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            background: #fff;
+        }
+        .toolbar-btn {
+            padding: 4px 8px;
+            font-size: 12px;
+            color: #444;
+            background: none;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Email list */
+        .email-list { background: #fff; }
+
+        /* Regular email row */
+        .email-row {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            gap: 12px;
+            transition: background 0.1s;
+        }
+        .email-row:hover { background: #f8f9fa; }
+        .email-row.unread { background: #fff; font-weight: 600; }
+        .email-row.read { background: #f8f9fa; }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .sender { width: 160px; font-size: 13px; flex-shrink: 0; color: #202124; }
+        .email-content { flex: 1; font-size: 13px; color: #202124; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .email-content .subject { font-weight: inherit; }
+        .email-content .preview { color: #5f6368; font-weight: 400; }
+        .email-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+        .email-date { font-size: 12px; color: #5f6368; }
+
+        /* ======= ECOS ANNOTATED EMAIL ======= */
+        .email-row-annotated {
+            border: 2px solid #1a73e8;
+            border-radius: 8px;
+            margin: 8px 16px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 1px 6px rgba(26,115,232,0.15);
+        }
+
+        .email-row-annotated .email-top {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            gap: 12px;
+            background: #fff;
+        }
+
+        /* Annotation card below */
+        .annotation-card {
+            background: #f8f9ff;
+            border-top: 1px solid #e8eaf6;
+            padding: 12px 14px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .annotation-image {
+            width: 120px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        .annotation-text { flex: 1; }
+        .annotation-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+        .annotation-desc {
+            font-size: 12px;
+            color: #5f6368;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .promo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #fff3e0;
+            border: 1px solid #ff9800;
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #e65100;
+            letter-spacing: 1px;
+        }
+        .promo-badge-icon { font-size: 13px; }
+        .annotation-cta {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 14px;
+            background: #1a73e8;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        /* Label */
+        .label {
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        /* Caption */
+        .caption {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #999;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+        .caption b { color: #1a73e8; }
+
+        /* Version 2: compact badge only (no image) */
+        .annotation-card-compact {
+            background: #fffde7;
+            border-top: 1px solid #fff9c4;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .compact-icon { font-size: 18px; }
+        .compact-text { font-size: 12px; color: #5f6368; flex: 1; }
+        .compact-text b { color: #202124; }
+
+        .section-label {
+            padding: 10px 16px 4px;
+            font-size: 11px;
+            color: #5f6368;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="gmail-chrome">
+
+    <!-- Top bar -->
+    <div class="top-bar">
+        <div class="gmail-logo">
+            <span>G</span><span>m</span><span>a</span><span>i</span><span>l</span>
+        </div>
+        <div class="search-bar">Поиск по почте</div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tab-bar">
+        <div class="tab"><span class="tab-icon">📥</span> Входящие</div>
+        <div class="tab active"><span class="tab-icon">🏷️</span> Промоакции</div>
+        <div class="tab"><span class="tab-icon">👥</span> Социальные сети</div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <button class="toolbar-btn">Все</button>
+        <button class="toolbar-btn">Непрочитанные</button>
+        <button class="toolbar-btn">Важные</button>
+    </div>
+
+    <div class="email-list">
+
+        <!-- Обычное письмо 1 -->
+        <div class="email-row read">
+            <div class="avatar" style="background:#4285F4;">S</div>
+            <div class="sender">Shopify</div>
+            <div class="email-content">
+                <span class="subject">Grow your store faster</span>
+                <span class="preview"> — New tools for your business this month...</span>
+            </div>
+            <div class="email-meta">
+                <div class="email-date">вчера</div>
+            </div>
+        </div>
+
+        <!-- ======= ECOS ПИСЬМО С АННОТАЦИЕЙ ======= -->
+        <div class="section-label">↓ Так будет выглядеть письмо ECOS после одобрения Google</div>
+
+        <div class="email-row-annotated">
+            <!-- Верхняя строка — как обычное письмо -->
+            <div class="email-top">
+                <div class="avatar" style="background: linear-gradient(135deg, #ff3b3b, #ff721d);">E</div>
+                <div class="sender" style="font-weight:600;">ECOS Mining</div>
+                <div class="email-content">
+                    <span class="subject">Congratulations on Your First Earnings!</span>
+                    <span class="preview" style="font-weight:400; color:#5f6368;"> — Your first payout is in your wallet. Here's an offer...</span>
+                </div>
+                <div class="email-meta">
+                    <span class="label">Промо</span>
+                    <div class="email-date">сегодня</div>
+                </div>
+            </div>
+
+            <!-- Аннотация с картинкой + промокод -->
+            <div class="annotation-card">
+                <img
+                    class="annotation-image"
+                    src="https://files.ecos.am/sasha/aas7Mf3YfeUrXhvHPv0hyHzMHjj2TsY6PPCuUu4k.png"
+                    alt="5X Hashrate"
+                    onerror="this.style.background='#f0f0f0';this.style.display='block';"
+                >
+                <div class="annotation-text">
+                    <div class="annotation-title">5X Hashrate Bonus — ECOS Cloud Mining</div>
+                    <div class="annotation-desc">5X hashrate bonus for first 30 days on 60-day contract</div>
+                    <div class="promo-badge">
+                        <span class="promo-badge-icon">🏷️</span>
+                        5XPOWER
+                    </div>
+                    <br>
+                    <a class="annotation-cta" href="#">Increase Power Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Обычное письмо 2 -->
+        <div class="email-row read">
+            <div class="avatar" style="background:#34A853;">K</div>
+            <div class="sender">KuCoin</div>
+            <div class="email-content">
+                <span class="subject">Exclusive from KuCoin Live</span>
+                <span class="preview"> — New staking opportunities available now...</span>
+            </div>
+            <div class="email-meta">
+                <div class="email-date">19 февр.</div>
+            </div>
+        </div>
+
+        <!-- Обычное письмо 3 -->
+        <div class="email-row read">
+            <div class="avatar" style="background:#FBBC05; color:#333;">B</div>
+            <div class="sender">Binance</div>
+            <div class="email-content">
+                <span class="subject">Your weekly crypto summary</span>
+                <span class="preview"> — BTC up 3%, portfolio insights inside...</span>
+            </div>
+            <div class="email-meta">
+                <div class="email-date">18 февр.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="caption">
+        Так выглядит письмо ECOS во вкладке <b>Промоакции</b> после одобрения Gmail Annotations.<br>
+        Картинка + промокод <b>5XPOWER</b> видны <b>до открытия письма</b>.
+    </div>
+</div>
+</body>
+</html>

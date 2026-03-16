@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>From Cloud Contract to 1.52 BTC — ECOS Case Study</title>
+    <style type="text/css">
+        /* ========================================
+           БАЗОВЫЕ СТИЛИ ДЛЯ ВСЕХ КЛИЕНТОВ
+        ======================================== */
+        body {
+            background: #FFFFFF;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            width: 600px !important;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border: none;
+        }
+        
+        /* ========================================
+           APPLE MAIL: ГРАДИЕНТНАЯ КНОПКА С АНИМАЦИЕЙ
+        ======================================== */
+        .gradient-btn {
+            display: inline-block;
+            background: #ff721d; /* Fallback для не-Apple клиентов */
+            background: linear-gradient(90deg, #ff721d 0%, #ff721d 20%, #45c9fd 50%, #45c9fd 70%, #0050b4 100%);
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 16px 44px;
+            text-decoration: none;
+            margin: 0 auto;
+            letter-spacing: 1px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            /* APPLE MAIL: Плавная анимация при нажатии */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 114, 29, 0.4);
+        }
+        
+        /* APPLE MAIL: Эффект при нажатии (работает на iOS/macOS) */
+        .gradient-btn:active {
+            transform: translateY(2px) scale(0.98);
+            box-shadow: 0 2px 10px rgba(255, 114, 29, 0.3);
+        }
+        
+        /* APPLE MAIL macOS: Эффект при наведении */
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 114, 29, 0.5);
+        }
+        
+        /* ========================================
+           APPLE MAIL: ГРАДИЕНТНЫЙ ТЕКСТ
+        ======================================== */
+        .gradient-text {
+            background: linear-gradient(135deg, #ff721d 0%, #45c9fd 50%, #0050b4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            /* Fallback для не-Apple клиентов */
+            color: #ff721d;
+        }
+        
+        /* ========================================
+           APPLE MAIL: АНИМАЦИЯ ПОЯВЛЕНИЯ
+        ======================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* ========================================
+           APPLE MAIL: GLASSMORPHISM ЭФФЕКТ
+        ======================================== */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            /* Fallback для не-Apple клиентов */
+            background: #f8f9fa;
+        }
+        
+        /* ========================================
+           APPLE MAIL: ЭФФЕКТ НАВЕДЕНИЯ НА ССЫЛКИ
+        ======================================== */
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .nav-link:hover {
+            color: #ff721d;
+            transform: translateY(-2px);
+        }
+        
+        /* ========================================
+           APPLE MAIL: КАРТОЧКА СО СТАТИСТИКОЙ
+        ======================================== */
+        .stat-box {
+            background: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 0 0 20px 0;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        /* ========================================
+           APPLE MAIL: DARK MODE ПОДДЕРЖКА
+        ======================================== */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a1a !important;
+            }
+            .email-container {
+                background: #2a2a2a !important;
+                border: 1px solid #404040 !important;
+            }
+            .content-box {
+                background: #333333 !important;
+            }
+            h1, h2, h3, p, .nav-link {
+                color: #ffffff !important;
+            }
+            .stat-box {
+                background: #3a3a3a !important;
+                border-color: #505050 !important;
+            }
+            .glass-card {
+                background: rgba(42, 42, 42, 0.8) !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+            }
+            img {
+                opacity: 0.9;
+            }
+            /* Градиентный текст остаётся ярким в Dark Mode */
+            .gradient-text {
+                -webkit-text-fill-color: transparent !important;
+            }
+        }
+        
+        /* ========================================
+           RESPONSIVE ДЛЯ МОБИЛЬНЫХ
+        ======================================== */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            .stat-box {
+                padding: 15px !important;
+            }
+            .gradient-btn {
+                width: 90% !important;
+                padding: 14px 20px !important;
+            }
+        }
+    </style>
+    
+    <!--[if mso]>
+    <style type="text/css">
+      /* Outlook Desktop: упрощённые стили */
+      .gradient-btn { background:#ff721d !important; }
+      .gradient-text { color: #ff721d !important; }
+      .glass-card { background: #f8f9fa !important; }
+    </style>
+    <![endif]-->
+</head>
+<body style="background: #FFFFFF; margin:0; padding:0;">
+    <!-- Preheader -->
+    <div style="display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
+        Real client success: From a small cloud contract to 1.52 BTC in 4 years. See how consistent reinvestment built a 29-miner farm.
+    </div>
+    
+    <table class="email-container" width="600" cellpadding="0" cellspacing="0" role="presentation" align="center" style="width:600px;max-width:600px; margin:0 auto; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.1); border: 1px solid #e9ecef;">
+        
+        <!-- LOGO -->
+        <tr>
+            <td style="padding: 30px 0; text-align: center; color: #333;">
+                <img src="https://files.ecos.am/sasha/rXMPaolTDgCgUJ5b2uD6Jd2E7K70c6Y2noaoX10I.png" alt="ECOS logo" width="150" style="margin: 0 auto; border-radius: 12px; display:block;">
+            </td>
+        </tr>
+        
+        <!-- NAVIGATION -->
+        <tr>
+            <td style="padding: 0 20px 20px; color: #333;">
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation" border="0" style="border-bottom: 1px solid #e9ecef; margin-bottom: 10px;">
+                    <tr>
+                        <td class="column" width="33.33%" style="padding: 10px; text-align: center;">
+                            <!-- APPLE MAIL: Анимированные ссылки -->
+                            <a href="https://cp.ecos.am/mining-store/buy-asics?utm_source=email&utm_medium=cpc&utm_campaign=en_case_study_apple&utm_content=header-equipment&utm_term=apple_segment" class="nav-link" style="color: #333; text-decoration: none; font-weight: 600; font-size: 14px; letter-spacing: 0.5px; text-transform: uppercase;">EQUIPMENT</a>
+                        </td>
+                        <td class="column" width="33.33%" style="padding: 10px; text-align: center;">
+                            <a href="https://b24-r2gcuj.bitrix24.site/crm_form_rbpey/?utm_source=email&utm_medium=cpc&utm_campaign=en_case_study_apple&utm_content=header-contact&utm_term=apple_segment" class="nav-link" style="color: #333; text-decoration: none; font-weight: 600; font-size: 14px; letter-spacing: 0.5px; text-transform: uppercase;">CONTACT US</a>
+                        </td>
+                        <td class="column" width="33.33%" style="padding: 10px; text-align: center;">
+                            <a href="https://api.whatsapp.com/send/?phone=37477096452&text=Hello%2C+I+need+consultation+by+ECOS+account+manager.&type=phone_number&app_absent=0&utm_source=email&utm_medium=cpc&utm_campaign=en_case_study_apple&utm_content=header-learnmore&utm_term=apple_segment" class="nav-link" style="color: #333; text-decoration: none; font-weight: 600; font-size: 14px; letter-spacing: 0.5px; text-transform: uppercase;">LEARN MORE</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        
+        <!-- MAIN CONTENT -->
+        <tr>
+            <td style="padding:0;">
+                <!-- APPLE MAIL: Glassmorphism карточка с анимацией -->
+                <div class="content-box glass-card animate-fade-in" style="width:560px; margin:0 auto 32px auto; background: #f8f9fa; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); padding: 0 0 24px 0; overflow: hidden;">
+                    
+                    <!-- HERO IMAGE с фильтром при наведении (только macOS) -->
+                    <div style="padding: 0; overflow: hidden;">
+                        <img src="https://files.ecos.am/sasha/kY9E1QM33Notgh5uhdwBu7lGiIuva20mlVEHVbIS.jpg" 
+                             alt="Mining Farm" 
+                             style="width:100%; max-width:560px; height:auto; display:block; margin:0; border-radius: 12px 12px 0 0; transition: transform 0.5s ease, filter 0.5s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'; this.style.filter='brightness(1.1)';"
+                             onmouseout="this.style.transform='scale(1)'; this.style.filter='brightness(1)';">
+                    </div>
+                    
+                    <!-- HEADER с градиентным текстом -->
+                    <div style="padding: 32px 24px 0 24px; text-align: center;">
+                        <!-- APPLE MAIL: Градиентный заголовок -->
+                        <h1 class="gradient-text" style="font-size: 32px; color: #ff721d; margin: 0 0 12px 0; font-weight: bold; background: linear-gradient(135deg, #ff721d 0%, #45c9fd 50%, #0050b4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            From Cloud Contract to 1.52 BTC
+                        </h1>
+                        <p style="font-size: 16px; color: #666; margin: 0 0 20px 0;">A 4-year journey that scaled into a 29-miner farm</p>
+                    </div>
+
+                    <!-- STATS BOX с анимацией -->
+                    <div style="padding: 0 24px;">
+                        <div class="stat-box" style="background: #fff; border: 2px solid #e9ecef; border-radius: 8px; padding: 20px; margin: 0 0 20px 0; text-align: center;">
+                            <!-- APPLE MAIL: Flexbox для идеального выравнивания -->
+                            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
+                                <div style="flex: 1; min-width: 100px; margin: 10px;">
+                                    <div style="font-size: 24px; font-weight: bold; color: #ff721d;">1.52 BTC</div>
+                                    <div style="font-size: 13px; color: #666;">Total mined</div>
+                                </div>
+                                <div style="flex: 1; min-width: 100px; margin: 10px;">
+                                    <div style="font-size: 24px; font-weight: bold; color: #45c9fd;">4 Years</div>
+                                    <div style="font-size: 13px; color: #666;">With ECOS</div>
+                                </div>
+                                <div style="flex: 1; min-width: 100px; margin: 10px;">
+                                    <div style="font-size: 24px; font-weight: bold; color: #0050b4;">29 Miners</div>
+                                    <div style="font-size: 13px; color: #666;">Current farm</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NARRATIVE -->
+                    <div style="padding: 0 24px; text-align: left;">
+                        <p style="font-size: 16px; color: #333; margin: 0 0 14px 0; line-height: 1.6;">
+                            This client started with a small <b>cloud mining contract</b>. As payouts accumulated, they reinvested strategically — first by <b>leasing equipment</b>, and later by <b>purchasing miners</b> hosted in our Armenia data center.
+                        </p>
+                        <p style="font-size: 16px; color: #333; margin: 0 0 14px 0; line-height: 1.6;">
+                            Over four years, the plan scaled up to a <b>29‑miner farm</b> — while operations, maintenance, and uptime remained fully managed by ECOS. Total mined to date: <b style="color: #ff721d;">1.52 BTC</b>.
+                        </p>
+                    </div>
+
+                    <!-- WHY IT WORKED с иконкой -->
+                    <div style="padding: 0 24px; text-align: center;">
+                        <!-- APPLE MAIL: Градиентная граница -->
+                        <div style="background: #fff; border-left: 4px solid transparent; border-image: linear-gradient(to bottom, #ff721d, #45c9fd, #0050b4) 1; padding: 16px 20px; margin: 24px 0; text-align: left;">
+                            <h3 style="font-size: 20px; color: #333; margin: 0 0 12px 0; font-weight: bold;">
+                                ✨ Why It Worked
+                            </h3>
+                            <p style="font-size: 16px; color: #333; margin: 0; line-height: 1.6;">
+                                Consistent reinvestment + professional hosting = steady BTC accumulation over 4 years
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA BUTTON с анимацией -->
+                    <div style="text-align: center; margin: 24px 0;">
+                        <!-- APPLE MAIL: Анимированная кнопка с пульсацией -->
+                        <a href="https://b24-r2gcuj.bitrix24.site/crm_form_rbpey/?utm_source=email&utm_medium=cpc&utm_campaign=en_case_study_apple&utm_content=cta-request-plan&utm_term=apple_segment" 
+                           class="gradient-btn animate-pulse"
+                           style="display: inline-block; width: 360px; border-radius: 8px; font-size: 16px; padding: 14px 0; text-decoration: none; font-weight: bold; text-align: center; margin: 0 auto; background: linear-gradient(90deg, #ff721d 0%, #ff721d 20%, #45c9fd 50%, #45c9fd 70%, #0050b4 100%); color: #fff; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 20px rgba(255, 114, 29, 0.4);">
+                            REQUEST YOUR CASE PLAN
+                        </a>
+                    </div>
+                    
+                    <!-- APPLE MAIL: Дополнительная инфо-карточка -->
+                    <div style="padding: 0 24px; margin-top: 20px;">
+                        <div style="background: rgba(255, 114, 29, 0.1); border-radius: 8px; padding: 16px; text-align: center;">
+                            <p style="margin: 0; font-size: 14px; color: #333;">
+                                💡 <b>Join 50,000+ miners</b> who trust ECOS for professional hosting
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        
+        <!-- FOOTER -->
+        <tr>
+            <td style="padding: 0 20px 16px 20px; text-align: center; background: transparent; color: #333; border-radius: 0;">
+                <p style="margin: 0 0 4px 0; font-size: 12px; line-height: 1.4; color: #666; font-weight: 600; letter-spacing: 0.5px; text-align: center;">
+                    <b>ON A MISSION TO MAKE CRYPTO MINING AS PROFITABLE AS POSSIBLE</b>
+                </p>
+                <div style="text-align: center; padding: 0 0 12px 0; margin: 0 auto;">
+                    <a href="https://ecos.am/en/blog/?utm_source=email&utm_medium=cpc&utm_campaign=en_case_study_apple&utm_content=footer-blog&utm_term=apple_segment" style="color: #333; text-decoration: underline; margin: 0 8px; font-size: 12px; display: inline-block; transition: color 0.3s;" onmouseover="this.style.color='#ff721d'" onmouseout="this.style.color='#333'">Our Blog</a> 
+                    <span style="color: #666;">|</span>
+                    <a href="https://ecos.am/en/?utm_source=email&utm_medium=cpc&utm_campaign=en_case_study_apple&utm_content=footer-store&utm_term=apple_segment" style="color: #333; text-decoration: underline; margin: 0 8px; font-size: 12px; display: inline-block; transition: color 0.3s;" onmouseover="this.style.color='#ff721d'" onmouseout="this.style.color='#333'">Store</a> 
+                    <span style="color: #666;">|</span>
+                    <a href="https://ecoshelp.zendesk.com/hc/en-us/requests/new?utm_source=email&utm_medium=cpc&utm_campaign=en_case_study_apple&utm_content=footer-support&utm_term=apple_segment" style="color: #333; text-decoration: underline; margin: 0 8px; font-size: 12px; display: inline-block; transition: color 0.3s;" onmouseover="this.style.color='#ff721d'" onmouseout="this.style.color='#333'">Customer Support</a> 
+                    <span style="color: #666;">|</span>
+                    <a href="{{unsubscribe_url}}" style="color: #333; text-decoration: underline; margin: 0 8px; font-size: 12px; display: inline-block;">Unsubscribe</a>
+                </div>
+                
+                <!-- APPLE MAIL: Анимированные социальные иконки -->
+                <div style="text-align: center; padding: 0 0 12px 0;">
+                    <a href="https://t.me/EcosCloudMining" style="text-decoration:none;margin:0 6px;display:inline-block; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-3px) scale(1.1)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+                        <img src="https://img.icons8.com/color/48/telegram-app.png" alt="Telegram" width="28" height="28" style="display:inline-block;">
+                    </a>
+                    <a href="https://www.youtube.com/c/ECOS_mining" style="text-decoration:none;margin:0 6px;display:inline-block; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-3px) scale(1.1)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+                        <img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube" width="28" height="28" style="display:inline-block;">
+                    </a>
+                    <a href="https://api.whatsapp.com/send/?phone=37477096452&text=Hello%2C+I+need+consultation+by+ECOS+account+manager.&type=phone_number&app_absent=0" style="text-decoration:none;margin:0 6px;display:inline-block; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-3px) scale(1.1)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+                        <img src="https://img.icons8.com/color/48/whatsapp.png" alt="WhatsApp" width="28" height="28" style="display:inline-block;">
+                    </a>
+                </div>
+                
+                <img src="https://files.ecos.am/sasha/rXMPaolTDgCgUJ5b2uD6Jd2E7K70c6Y2noaoX10I.png" alt="ECOS" width="70" style="display:block; margin:0 auto; border-radius:0px;">
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+
+
