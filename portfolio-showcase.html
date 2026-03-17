@@ -523,7 +523,7 @@
         <div class="meta-left">
           <span class="meta-num">01 / 13</span>
           <h2 class="meta-title">Newsletter — Exit Intent</h2>
-          <p class="meta-desc">Fires when the cursor reaches the top edge of the viewport. Collects phone + email, stores submission in localStorage, respects 24h cooldown.</p>
+          <p class="meta-desc">Fires on ecos.am/en and ecos.am/ru when cursor hits top of viewport. Excluded: cp.ecos.am, asics-marketplace, blog, contracts. Submit → never again; close ✕ → repeat after 24h. Overlay and Escape disabled. SPA-ready.</p>
         </div>
         <div class="tags">
           <span class="tag tag-t">Exit Intent</span><span class="tag tag-p">Carrot Quest</span>
@@ -554,7 +554,7 @@
         <div class="meta-left">
           <span class="meta-num">02 / 13</span>
           <h2 class="meta-title">Marketplace Launch — CP Banner</h2>
-          <p class="meta-desc">Compact notification badge. Only fires on cp.ecos.am — guides logged-in users to the newly launched Hashrate Marketplace.</p>
+          <p class="meta-desc">Compact notification badge on cp.ecos.am. Fires immediately on page open, repeats every 1 day. Closes only via ✕ or button — Escape disabled. Guides logged-in users to the Hashrate Marketplace.</p>
         </div>
         <div class="tags">
           <span class="tag tag-t">On Load · Auto</span><span class="tag tag-p">Carrot Quest</span>
@@ -641,10 +641,10 @@
         <div class="meta-left">
           <span class="meta-num">05 / 13</span>
           <h2 class="meta-title">Marketplace Offers — Subscribe</h2>
-          <p class="meta-desc">Appears in the top-right on scroll. Dark-themed floating card with product image, phone + email capture for used ASIC miner deal alerts.</p>
+          <p class="meta-desc">Fires on ecos.am/en/asics-marketplace and /ru/asics-marketplace. Page open in CQ + 5s JS delay. Dark-themed top-right card, phone + email capture. Closes only via ✕ or button — overlay and Escape disabled. Repeat every 1 day.</p>
         </div>
         <div class="tags">
-          <span class="tag tag-t">On Scroll</span><span class="tag tag-p">Carrot Quest</span>
+          <span class="tag tag-t">Page Open · 5s</span><span class="tag tag-p">Carrot Quest</span>
           <span class="tag tag-s">Top-Right Corner</span><span class="tag tag-c">380px · Dark</span>
         </div>
       </div>
@@ -667,10 +667,10 @@
         <div class="meta-left">
           <span class="meta-num">06 / 13</span>
           <h2 class="meta-title">Referral Invite</h2>
-          <p class="meta-desc">Fires 12 seconds after a confirmed purchase. Encourages users to invite friends for up to 7% referral commission. Two-CTA design: invite + dashboard.</p>
+          <p class="meta-desc">Fires after a confirmed purchase on cp.ecos.am (events: Contract, ASIC+Hosting, ASIC Rental). 3s delay via CQ + 12s internal. Closes only via ✕ or buttons — overlay and Escape disabled. Two-CTA design: invite + dashboard.</p>
         </div>
         <div class="tags">
-          <span class="tag tag-t">12s After Purchase</span><span class="tag tag-p">Carrot Quest</span>
+          <span class="tag tag-t">Purchase Event · 3s</span><span class="tag tag-p">Carrot Quest</span>
           <span class="tag tag-s">Center Modal</span><span class="tag tag-c">560px</span>
         </div>
       </div>
@@ -695,7 +695,7 @@
         <div class="meta-left">
           <span class="meta-num">07 / 13</span>
           <h2 class="meta-title">Callback Request</h2>
-          <p class="meta-desc">Triggered at 30% scroll depth on /en/blog. Full country-code selector + phone + email form. Background image on the right panel for visual impact.</p>
+          <p class="meta-desc">Fires on ecos.am/en/blog (excluded on cp.ecos) — triggered by page open in CQ, then JS waits for 30% scroll. Full country-code selector + phone + email form. Closes only via ✕ or submit — overlay and Escape disabled. Background image right panel.</p>
         </div>
         <div class="tags">
           <span class="tag tag-t">30% Scroll</span><span class="tag tag-p">Carrot Quest</span>
@@ -1001,15 +1001,29 @@
               <td><span class="cell-no">–</span></td>
             </tr>
 
+            <!-- /en/asics-marketplace -->
+            <tr>
+              <td class="page-name">ecos.am/en/asics-marketplace<span>ASIC P2P marketplace</span></td>
+              <td><span class="cell-no">–</span></td>
+              <td><span class="cell-no">–</span></td>
+              <td><span class="cell-no">–</span></td>
+              <td><span class="cell-no">–</span></td>
+              <td><span class="cell-yes">✓<span class="trigger">Page open · 5s</span></span></td>
+              <td><span class="cell-no">–</span></td>
+              <td><span class="cell-no">–</span></td>
+              <td><span class="cell-no">–</span></td>
+              <td><span class="cell-no">–</span></td>
+            </tr>
+
             <!-- cp.ecos.am -->
             <tr>
               <td class="page-name">cp.ecos.am — any page<span>personal account / dashboard</span></td>
               <td><span class="cell-no">–</span></td>
-              <td><span class="cell-warn">⚠<span class="trigger">On load</span></span></td>
+              <td><span class="cell-warn">⚠<span class="trigger">On load · 30s chain</span></span></td>
               <td><span class="cell-no">–</span></td>
               <td><span class="cell-yes">✓<span class="trigger">No URL filter</span></span></td>
               <td><span class="cell-no">–</span></td>
-              <td><span class="cell-yes">✓<span class="trigger">12s/purchase</span></span></td>
+              <td><span class="cell-yes">✓<span class="trigger">Purchase event · 3s</span></span></td>
               <td><span class="cell-no">–</span></td>
               <td><span class="cell-no">–</span></td>
               <td><span class="cell-yes">✓<span class="trigger">2s · active</span></span></td>
@@ -1128,7 +1142,10 @@
       "game-beta-test-exclusive.html",
       "gmail-annotations-preview.html",
       "happy-new-year-2026-ecos.html",
+      "asics-marketplace-bids-live.html",
+      "hashrate-marketplace-bid-offer-90.html",
       "HASHRATE-MARKETPLACE-BIDS-LIVE.html",
+      "hosted-asics-own-full-mining-power.html",
       "hosted-asics-marketplace-antminer-s21-200.html",
       "hosted-asics-marketplace-t3.html",
       "introducing-ecos-mining-vault.html",
@@ -1141,12 +1158,14 @@
       "price-drop-antminer-s21-plus-235.html",
       "triple-power-final-days-ends-monday.html",
       "TRIPLE-POWER-3X-FROM-150.html",
+      "tbb-activation-antminer-s21-xp.html",
       "weekly-mining-digest.html",
       "weekly-mining-digest-btc-support-marketplace.html",
       "weekly-mining-digest-from-transcript-1.html",
       "weekly-mining-digest-from-transcript-2.html",
       "weekly-mining-digest-from-transcript-3.html",
       "weekly-mining-digest-from-transcript-4.html",
+      "welcome-bitcoin-mining-intro.html",
       "WELCOME-SURVEY-3-QUESTIONS-PROMO.html",
       "Welcome_Offer_Apple_Enhanced.html",
       "\u0422\u0430\u0431\u043b\u0438\u0446\u0430_\u0434\u043b\u044f_\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f.html",
